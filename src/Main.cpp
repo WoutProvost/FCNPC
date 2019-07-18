@@ -9,7 +9,6 @@
   =========================================*/
 
 #include "Main.hpp"
-#include "CAddress.hpp"
 
 // Globals
 logprintf_t  logprintf;
@@ -326,6 +325,8 @@ AMX_NATIVE_INFO PluginNatives[] = {
 
 	{ "FCNPC_ShowInTabListForPlayer", CNatives::FCNPC_ShowInTabListForPlayer },
 	{ "FCNPC_HideInTabListForPlayer", CNatives::FCNPC_HideInTabListForPlayer },
+
+	{ "FCNPC_InitPathfindingPool", CNatives::FCNPC_InitPathfindingPool },
 
 	// Map Andreas
 	{ "MapAndreas_Init", CMapAndreasNatives::Init },

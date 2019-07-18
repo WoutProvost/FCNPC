@@ -22,8 +22,9 @@ CServer::CServer(eSAMPVersion version)
 	// Reset instances
 	m_pPlayerDataManager = NULL;
 	m_pNodeManager = NULL;
-	m_pMovePath = NULL;
 	m_pRecordManager = NULL;
+	m_pMovePath = NULL;
+	m_pPathfindingPool = NULL;
 	m_pMapAndreas = NULL;
 	m_pColAndreas = NULL;
 	// Initialize the update rate
@@ -47,8 +48,9 @@ CServer::~CServer()
 	// Delete instance
 	SAFE_DELETE(m_pPlayerDataManager);
 	SAFE_DELETE(m_pNodeManager);
-	SAFE_DELETE(m_pMovePath);
 	SAFE_DELETE(m_pRecordManager);
+	SAFE_DELETE(m_pMovePath);
+	SAFE_DELETE(m_pPathfindingPool);
 	SAFE_DELETE(m_pMapAndreas);
 	SAFE_DELETE(m_pColAndreas);
 }
@@ -100,11 +102,14 @@ BYTE CServer::Initialize(AMX *pAMX)
 	// Create the node manager instance
 	m_pNodeManager = new CNodeManager;
 
+	// Create the record instance
+	m_pRecordManager = new CRecordManager;
+
 	// Create the move path instance
 	m_pMovePath = new CMovePath;
 
-	// Create the record instance
-	m_pRecordManager = new CRecordManager;
+	// Create the pathfinding pool instance
+	m_pPathfindingPool = new CPathfindingPool;
 
 	// Create the MapAndreas instance
 	m_pMapAndreas = new CMapAndreas;
@@ -163,6 +168,16 @@ CRecordManager *CServer::GetRecordManager()
 	return m_pRecordManager;
 }
 
+CMovePath *CServer::GetMovePath()
+{
+	return m_pMovePath;
+}
+
+CPathfindingPool *CServer::GetPathfindingPool()
+{
+	return m_pPathfindingPool;
+}
+
 CMapAndreas *CServer::GetMapAndreas()
 {
 	return m_pMapAndreas;
@@ -171,11 +186,6 @@ CMapAndreas *CServer::GetMapAndreas()
 ColAndreasWorld *CServer::GetColAndreas()
 {
 	return m_pColAndreas;
-}
-
-CMovePath *CServer::GetMovePath()
-{
-	return m_pMovePath;
 }
 
 void CServer::ToggleCrashLogCreation(bool enabled)

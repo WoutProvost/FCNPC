@@ -48,6 +48,10 @@
 #include <array>
 #include <queue>
 #include <sstream>
+#include <atomic>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 #include <btBulletDynamicsCommon.h>
 // Library includes
 #include <sdk/plugin.h>
@@ -65,6 +69,9 @@
 // Nodes includes
 #include "CPlayback.hpp"
 #include "CNode.hpp"
+// Pathfinding includes
+#include "CPathfindingWorker.hpp"
+#include "CPathfindingRequest.hpp"
 // Server includes
 #include "CAddress.hpp"
 #include "CServer.hpp"
@@ -72,8 +79,6 @@
 #include "CVehicleInfo.hpp"
 #include "CWeaponInfo.hpp"
 #include "CAnimationInfo.hpp"
-#include "CMovePath.hpp"
-#include "CRecordManager.hpp"
 // SAMP includes
 #include "CSAMPRakPeer.hpp"
 #include "CFunctions.hpp"
@@ -85,6 +90,9 @@
 // Managers includes
 #include "CPlayerManager.hpp"
 #include "CNodeManager.hpp"
+#include "CRecordManager.hpp"
+#include "CMovePath.hpp"
+#include "CPathfindingPool.hpp"
 #include "CCallbackManager.hpp"
 // Entity includes
 #include "CPlayerData.hpp"

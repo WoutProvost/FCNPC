@@ -3918,3 +3918,26 @@ cell AMX_NATIVE_CALL CNatives::FCNPC_HideInTabListForPlayer(AMX *amx, cell *para
 	pPlayerData->RemoveForPlayer(wForPlayerId);
 	return static_cast<int>(pPlayerData->AddForPlayer(wForPlayerId, true));
 }
+
+// native FCNPC_InitPathfindingPool(size);
+cell AMX_NATIVE_CALL CNatives::FCNPC_InitPathfindingPool(AMX *amx, cell *params)
+{
+	CHECK_PARAMS(1, "FCNPC_InitPathfindingPool");
+
+	// Get the params
+	int iSize = static_cast<int>(params[1]);
+
+	// Validate the size
+	if (iSize <= 0) {
+		return 0;
+	}
+
+	// Only allow to set up the thread pool once
+	if (pServer->GetPathfindingPool()->IsInitialized()) {
+		return 0;
+	}
+
+	// Set up the thread pool
+	pServer->GetPathfindingPool()->Initialize(iSize);
+	return 1;
+}

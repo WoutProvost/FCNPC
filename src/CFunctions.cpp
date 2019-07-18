@@ -834,7 +834,6 @@ WORD CFunctions::GetClosestMapPointInBetween(const CVector &vecHitOrigin, const 
 	return wClosestMapPoint;
 }
 
-
 WORD CFunctions::RayCastLine(const CVector &vecStart, const CVector &vecEnd, CVector *vecResult)
 {
 	btVector3 Start = btVector3(btScalar(vecStart.fX + 0.00001), btScalar(vecStart.fY + 0.00001), btScalar(vecStart.fZ + 0.00001));
@@ -851,4 +850,26 @@ WORD CFunctions::RayCastLine(const CVector &vecStart, const CVector &vecEnd, CVe
 	}
 
 	return 0;
+}
+
+void CFunctions::FindPath(WORD wPlayerId, const CVector &vecDestination)
+{
+	// Validate the player
+	CPlayerManager *pPlayerManager = pServer->GetPlayerManager();
+	if (!pPlayerManager->IsNpcConnected(wPlayerId)) {
+		return;
+	}
+
+	// Get the player
+	CPlayerData *pPlayerData = pPlayerManager->GetAt(wPlayerId);
+
+	// Get the origin vector position
+	CVector vecOrigin;
+	pPlayerData->GetPosition(&vecOrigin);
+
+	// Construct the request
+	CPathfindingRequest *pRequest = new CPathfindingRequest(wPlayerId, vecOrigin.fX, vecOrigin.fY, vecOrigin.fZ, vecDestination.fX, vecDestination.fY, vecDestination.fZ);
+
+	// Find a path between the origin and the destination
+	pServer->GetPathfindingPool()->QueueRequest(pRequest);
 }

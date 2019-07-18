@@ -23,6 +23,7 @@ class ColAndreasWorld;
 #include "CNodeManager.hpp"
 #include "CRecordManager.hpp"
 #include "CMovePath.hpp"
+#include "CPathfindingPool.hpp"
 
 class CServer
 {
@@ -37,6 +38,7 @@ public:
 	CNodeManager *GetNodeManager();
 	CRecordManager *GetRecordManager();
 	CMovePath *GetMovePath();
+	CPathfindingPool *GetPathfindingPool();
 	CMapAndreas *GetMapAndreas();
 	ColAndreasWorld *GetColAndreas();
 
@@ -69,9 +71,10 @@ private:
 	CPlayerManager *m_pPlayerDataManager;
 	CNodeManager *m_pNodeManager;
 	CRecordManager *m_pRecordManager;
+	CMovePath *m_pMovePath;
+	CPathfindingPool *m_pPathfindingPool;
 	CMapAndreas *m_pMapAndreas;
 	ColAndreasWorld *m_pColAndreas;
-	CMovePath *m_pMovePath;
 	DWORD m_dwUpdateRate;
 	bool m_bCrashLogCreation;
 	bool m_bMoveModeEnabled[MOVE_MODE_SIZE];

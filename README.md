@@ -352,6 +352,8 @@ native Float:FCNPC_GetMinHeightPosCall(npcid);
 
 native FCNPC_ShowInTabListForPlayer(npcid, forplayerid);
 native FCNPC_HideInTabListForPlayer(npcid, forplayerid);
+
+native FCNPC_InitPathfindingPool(size);
 ```
 
 # Vendor Natives

@@ -69,6 +69,8 @@ public:
 
 	static WORD RayCastLine(const CVector &vecStart, const CVector &vecEnd, CVector *vecResult);
 
+	static void FindPath(WORD wPlayerId, const CVector &vecDestination);
+
 	// Functions
 	static ClientJoin_RPC_t                 pfn__ClientJoin_RPC;
 	static CPlayerPool__DeletePlayer_t      pfn__CPlayerPool__DeletePlayer;
